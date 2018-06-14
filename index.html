@@ -19,9 +19,15 @@
             <button type="button" v-on:click="dialogCanel()">取消</button>
         </div>
         <ul>
-                <li v-for="item in items">
-                  {{ item }}
-                </li>
+            <li v-for="item in items">
+                <input type="checkbox" v-model="item.isDone" /> 
+                <s v-if="item.isDone">
+                        {{ item.title }}
+                </s>
+                <span v-else>
+                        {{ item.title }}
+                </span>
+            </li>
         </ul>
     </div>
 
@@ -32,24 +38,27 @@
         var app = new Vue({
             el: '#app',
             data: {
-                showCreateDialog : false,
+                showCreateDialog: false,
                 message: '',
-                items : [
-
+                items: [
+                    {
+                        title : 'demo',
+                        isDone : true
+                    }
                 ]
             },
             methods: {
                 createDialog: function () {
-                    
+
                     this.showCreateDialog = !this.showCreateDialog;
 
                 },
-                dialogSave : function(){
-                    this.items.push(this.message);
+                dialogSave: function () {
+                    this.items.push({ title: this.message, isDone: false });
                     this.message = '';
                     this.showCreateDialog = false;
                 },
-                dialogCanel : function(){
+                dialogCanel: function () {
                     this.showCreateDialog = false;
                 }
             }
