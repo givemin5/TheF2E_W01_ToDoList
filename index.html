@@ -7,6 +7,11 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <style>
+     .isDone{
+        text-decoration: line-through;
+     }
+    </style>
 
 </head>
 
@@ -19,12 +24,9 @@
             <button type="button" v-on:click="dialogCanel()">取消</button>
         </div>
         <ul>
-            <li v-for="item in items">
+            <li v-for="(item,index) in items">
                 <input type="checkbox" v-model="item.isDone" /> 
-                <s v-if="item.isDone">
-                        {{ item.title }}
-                </s>
-                <span v-else>
+                <span v-bind:class="{isDone : item.isDone}">
                         {{ item.title }}
                 </span>
             </li>
